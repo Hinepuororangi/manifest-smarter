@@ -3,30 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRA OS</title>
+<title>Manifest Smarter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --paper: #F7F3EF;
-  --paper-2: #F0EAE4;
-  --paper-3: #E8E0D8;
-  --ink: #2C2420;
-  --ink-2: #6B5E58;
-  --ink-3: #A8998F;
-  --ink-4: #C4B8B0;
-  --rose: #C47D7D;
-  --rose-bright: #B86B6B;
-  --rose-dim: rgba(196,125,125,0.1);
-  --rose-mid: rgba(196,125,125,0.2);
-  --sage: #7A8C72;
-  --sage-dim: rgba(122,140,114,0.12);
-  --warm: #C4962A;
-  --warm-dim: rgba(196,150,42,0.1);
-  --border: rgba(44,36,32,0.1);
-  --border-2: rgba(44,36,32,0.06);
+  --bg: #F9F5F1;
+  --bg-2: #F2EBE3;
+  --bg-3: #E8DDD3;
+  --white: #FFFFFF;
+  --cacao: #5C3D2E;
+  --cacao-2: #7A5242;
+  --cacao-3: #9B6E5A;
+  --cacao-dim: rgba(92,61,46,0.08);
+  --cacao-mid: rgba(92,61,46,0.18);
+  --sand: #C4A882;
+  --sand-dim: rgba(196,168,130,0.15);
+  --sage: #8A9E82;
+  --sage-dim: rgba(138,158,130,0.12);
+  --warm: #C4A882;
+  --ink: #2A1A12;
+  --ink-2: #5C3D2E;
+  --ink-3: #9B7A6A;
+  --ink-4: #C4A898;
+  --border: rgba(92,61,46,0.1);
+  --border-2: rgba(92,61,46,0.06);
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
 }
@@ -34,7 +37,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
   min-height: 100vh;
@@ -42,6 +45,32 @@ body {
   flex-direction: column;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ── PRINCIPLE BAR ── */
+.principle-bar {
+  background: var(--cacao);
+  padding: 11px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.principle-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245,237,228,0.45);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.principle-text {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-style: italic;
+  color: #F5EDE4;
+  font-weight: 400;
 }
 
 /* ── TOPBAR ── */
@@ -52,47 +81,57 @@ body {
   padding: 18px 28px;
   position: sticky;
   top: 0;
-  background: rgba(247,243,239,0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(249,245,241,0.96);
+  backdrop-filter: blur(16px);
   z-index: 100;
   border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  color: var(--ink-2);
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--cacao);
 }
 
-.logo em { color: var(--rose); font-style: normal; }
+.logo sup {
+  font-size: 9px;
+  font-weight: 400;
+  vertical-align: super;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+}
 
 .date-label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--ink-3);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
 .mode-pill {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
-  background: var(--paper-2);
+  background: var(--white);
   border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 7px 16px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s;
+  box-shadow: 0 1px 8px var(--cacao-dim);
 }
 
-.mode-pill:hover { border-color: var(--rose); color: var(--rose-bright); }
+.mode-pill:hover {
+  background: var(--cacao);
+  border-color: var(--cacao);
+  color: #F5EDE4;
+}
 
 .mode-dot {
   width: 6px; height: 6px;
@@ -104,13 +143,13 @@ body {
 
 @keyframes breathe {
   0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.25); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* ── MAIN ── */
 .main {
   flex: 1;
-  padding: 28px 28px 28px;
+  padding: 28px;
   max-width: 1080px;
   width: 100%;
   margin: 0 auto;
@@ -119,67 +158,40 @@ body {
   gap: 16px;
 }
 
-/* ── OPERATING PRINCIPLE ── */
-.principle-bar {
-  padding: 12px 20px;
-  background: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.principle-label {
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-.principle-text {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-style: italic;
-  color: var(--paper);
-  line-height: 1.4;
-}
-
 /* ── DCA ── */
 .dca-block {
-  padding: 28px 28px 24px;
-  background: var(--paper-2);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--rose);
+  padding: 36px 36px 32px;
+  background: var(--cacao);
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .dca-block::after {
   content: '';
   position: absolute;
-  bottom: -30px; right: -30px;
-  width: 100px; height: 100px;
+  bottom: -50px; right: -50px;
+  width: 180px; height: 180px;
   border-radius: 50%;
-  border: 1px solid var(--rose-mid);
+  background: radial-gradient(circle, rgba(245,237,228,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
 .dca-eyebrow {
   font-size: 9px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--rose);
-  font-weight: 500;
-  margin-bottom: 10px;
+  color: var(--sand);
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .dca-headline {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 400;
   font-style: italic;
-  color: var(--ink);
+  color: #F5EDE4;
   line-height: 1.4;
   max-width: 680px;
 }
@@ -192,73 +204,73 @@ body {
 }
 
 .outcome-tile {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border);
-  padding: 18px 16px 14px;
+  padding: 22px 18px 18px;
   cursor: pointer;
   transition: all 0.2s;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .outcome-tile:hover {
-  border-color: var(--rose);
+  border-color: var(--cacao-3);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(196,125,125,0.1);
+  box-shadow: 0 6px 20px var(--cacao-dim);
 }
 
 .outcome-num {
   font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 400;
-  color: var(--ink);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--cacao);
   line-height: 1;
   margin-bottom: 4px;
 }
 
 .outcome-name {
   font-size: 9px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--ink-3);
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 .outcome-bar {
   height: 2px;
-  background: var(--paper-3);
+  background: var(--bg-3);
   border-radius: 1px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .outcome-bar-fill {
   height: 100%;
-  background: var(--rose);
+  background: linear-gradient(90deg, var(--cacao), var(--sand));
   border-radius: 1px;
 }
 
 .outcome-q {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--ink-4);
   font-family: var(--font-display);
   font-style: italic;
   line-height: 1.4;
 }
 
-/* ── TWO COL ── */
+/* ── GRID ── */
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* ── PANEL ── */
 .panel {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border);
-  padding: 20px 20px 18px;
-  border-radius: 2px;
+  padding: 22px 22px 20px;
+  border-radius: 4px;
 }
 
 .section-label {
@@ -266,198 +278,197 @@ body {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--ink-3);
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* ── SIGNAL ── */
 .signal-text {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 400;
+  font-style: italic;
   color: var(--ink);
   line-height: 1.55;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .signal-sub {
   font-size: 12px;
   color: var(--ink-2);
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
-/* ── CONSTRAINT ── */
 .constraint-panel {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border);
   border-left: 3px solid var(--sage);
-  padding: 20px 20px 18px;
-  border-radius: 0 2px 2px 0;
+  padding: 22px 22px 20px;
+  border-radius: 0 4px 4px 0;
 }
 
 .constraint-text {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 15px;
+  font-style: italic;
   color: var(--ink);
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
+/* ── TAGS ── */
 .tag {
   font-size: 9px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 2px;
+  padding: 3px 10px;
   display: inline-block;
   margin-right: 4px;
   margin-bottom: 4px;
+  font-weight: 600;
+  border-radius: 20px;
 }
 
-.tag-sage { color: var(--sage); background: var(--sage-dim); border: 1px solid rgba(122,140,114,0.25); }
-.tag-rose { color: var(--rose-bright); background: var(--rose-dim); border: 1px solid var(--rose-mid); }
-.tag-warm { color: var(--warm); background: var(--warm-dim); border: 1px solid rgba(196,150,42,0.25); }
-.tag-ink { color: var(--ink-3); background: var(--paper-2); border: 1px solid var(--border); }
+.tag-cacao { color: var(--cacao-2); background: var(--cacao-dim); border: 1px solid var(--cacao-mid); }
+.tag-sage { color: var(--sage); background: var(--sage-dim); border: 1px solid rgba(138,158,130,0.3); }
+.tag-sand { color: var(--cacao-3); background: var(--sand-dim); border: 1px solid rgba(196,168,130,0.3); }
+.tag-dim { color: var(--ink-3); background: var(--bg-2); border: 1px solid var(--border); }
 
 /* ── LOOPS ── */
-.loop-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.loop-list { display: flex; flex-direction: column; gap: 8px; }
 
 .loop-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 11px 12px;
-  background: var(--paper);
+  gap: 14px;
+  padding: 13px 16px;
+  background: var(--bg);
   border: 1px solid var(--border-2);
-  border-radius: 2px;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
+  border-radius: 4px;
 }
 
-.loop-item:hover { background: var(--paper-2); border-color: var(--rose-mid); }
+.loop-item:hover {
+  background: var(--bg-2);
+  border-color: var(--cacao-mid);
+  transform: translateX(3px);
+}
+
 .loop-item.done { opacity: 0.35; }
 .loop-item.done .loop-name { text-decoration: line-through; }
 
 .loop-check {
-  width: 18px; height: 18px;
+  width: 20px; height: 20px;
   border: 1.5px solid var(--ink-4);
   border-radius: 50%;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   font-size: 9px;
   color: transparent;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
-.loop-item:hover .loop-check { border-color: var(--rose); color: var(--rose); }
-.loop-item.done .loop-check { background: var(--rose); border-color: var(--rose); color: white; }
+.loop-item:hover .loop-check { border-color: var(--cacao); color: var(--cacao); }
+.loop-item.done .loop-check { background: var(--cacao); border-color: var(--cacao); color: #F5EDE4; }
 
-.loop-name { flex: 1; font-size: 13px; color: var(--ink); }
+.loop-name { flex: 1; font-size: 13px; color: var(--ink); font-weight: 500; }
 .loop-tag { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); }
 
-/* ── MISSIONS ── */
+/* ── MISSION CARDS ── */
 .mission-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .mission-card {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border);
-  padding: 20px 18px 18px;
-  border-radius: 2px;
+  padding: 24px 22px 22px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s;
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .mission-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
+  height: 3px;
 }
 
-.mission-card.card-rose::before { background: var(--rose); }
-.mission-card.card-sage::before { background: var(--sage); }
-.mission-card.card-warm::before { background: var(--warm); }
+.mission-card.card-cacao::before { background: linear-gradient(90deg, var(--cacao), var(--cacao-3)); }
+.mission-card.card-sage::before { background: linear-gradient(90deg, var(--sage), #6A8A62); }
+.mission-card.card-sand::before { background: linear-gradient(90deg, var(--sand), #A88860); }
 
 .mission-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(44,36,32,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px var(--cacao-dim);
+  border-color: var(--cacao-mid);
 }
 
-.mission-card-label {
+.mission-card-num {
   font-size: 9px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ink-3);
-  font-weight: 500;
-  margin-bottom: 8px;
+  color: var(--ink-4);
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .mission-card-name {
   font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 21px;
+  font-weight: 600;
   color: var(--ink);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   line-height: 1.2;
 }
 
 .mission-card-dca {
-  font-size: 12px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin-bottom: 14px;
-  font-style: italic;
   font-family: var(--font-display);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-2);
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
 
 .mission-card-outcomes {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-.mission-card-stage {
-  font-size: 10px;
-  color: var(--ink-3);
+.mission-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--border-2);
+  border-top: 1px solid var(--border);
   padding-top: 12px;
-  margin-top: 4px;
+  font-size: 11px;
+  color: var(--ink-3);
 }
 
 .m-status {
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 600;
   border: 1px solid;
   white-space: nowrap;
 }
 
-.m-active { color: var(--sage); border-color: rgba(122,140,114,0.3); background: var(--sage-dim); }
-.m-blocked { color: var(--rose-bright); border-color: var(--rose-mid); background: var(--rose-dim); }
-.m-incubating { color: var(--ink-3); border-color: var(--border); background: var(--paper-2); }
-.m-waiting { color: var(--warm); border-color: rgba(196,150,42,0.3); background: var(--warm-dim); }
+.m-active { color: var(--sage); border-color: rgba(138,158,130,0.4); background: var(--sage-dim); }
+.m-waiting { color: var(--cacao-3); border-color: var(--cacao-mid); background: var(--cacao-dim); }
 
 /* ── DECISIONS ── */
 .decision-row {
@@ -470,8 +481,9 @@ body {
 .decision-text {
   font-family: var(--font-display);
   font-size: 14px;
+  font-style: italic;
   color: var(--ink);
-  line-height: 1.65;
+  line-height: 1.7;
   margin-bottom: 6px;
 }
 
@@ -480,7 +492,7 @@ body {
   gap: 12px;
   font-size: 10px;
   color: var(--ink-4);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -496,7 +508,7 @@ body {
 /* ── ADD BTN ── */
 .add-btn {
   width: 20px; height: 20px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--ink-4);
   background: transparent;
   color: var(--ink-3);
   font-size: 14px;
@@ -504,32 +516,34 @@ body {
   display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
   border-radius: 50%;
+  line-height: 1;
 }
 
-.add-btn:hover { border-color: var(--rose); color: var(--rose); background: var(--rose-dim); }
+.add-btn:hover { border-color: var(--cacao); color: var(--cacao); background: var(--cacao-dim); }
 
-/* ── ALL MISSIONS LINK ── */
+/* ── ALL MISSIONS ── */
 .all-missions {
   text-align: center;
-  padding: 12px;
+  padding: 14px;
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-3);
   cursor: pointer;
-  transition: color 0.15s;
+  transition: all 0.2s;
   border: 1px dashed var(--border);
-  border-radius: 2px;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-.all-missions:hover { color: var(--rose); border-color: var(--rose-mid); }
+.all-missions:hover { color: var(--cacao); border-color: var(--cacao-mid); background: var(--cacao-dim); }
 
 /* ── BOTTOM NAV ── */
 .bottom-nav {
   position: sticky;
   bottom: 0;
-  background: rgba(247,243,239,0.97);
-  backdrop-filter: blur(12px);
+  background: rgba(249,245,241,0.97);
+  backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
   padding: 0 28px;
   display: flex;
@@ -546,42 +560,43 @@ body {
   cursor: pointer;
   transition: color 0.15s;
   border-bottom: 2px solid transparent;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nav-item:hover { color: var(--ink-2); }
-.nav-item.active { color: var(--rose-bright); border-bottom-color: var(--rose); }
+.nav-item.active { color: var(--cacao); border-bottom-color: var(--cacao); }
 .nav-spacer { flex: 1; }
 
 .review-btn {
   font-size: 9px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-3);
-  background: transparent;
-  border: 1px solid var(--border);
+  color: var(--cacao-2);
+  background: var(--cacao-dim);
+  border: 1px solid var(--cacao-mid);
   padding: 7px 16px;
   cursor: pointer;
   font-family: var(--font-body);
-  border-radius: 20px;
-  transition: all 0.15s;
+  border-radius: 30px;
+  transition: all 0.2s;
+  font-weight: 600;
 }
 
-.review-btn:hover { color: var(--ink); border-color: var(--ink-2); }
+.review-btn:hover { background: var(--cacao); color: #F5EDE4; border-color: var(--cacao); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
   .outcomes-row { grid-template-columns: repeat(2, 1fr); }
   .grid-2 { grid-template-columns: 1fr; }
   .mission-cards { grid-template-columns: 1fr; }
-  .main { padding: 16px 16px 16px; gap: 14px; }
+  .main { padding: 16px; gap: 14px; }
   .topbar { padding: 14px 16px; }
   .date-label { display: none; }
-  .dca-headline { font-size: 18px; }
-  .dca-block { padding: 20px 18px; }
+  .dca-headline { font-size: 20px; }
+  .dca-block { padding: 24px 20px; }
   .bottom-nav { padding: 0 16px; }
   .nav-item { padding: 14px 8px; font-size: 9px; }
-  .principle-bar { padding: 10px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .principle-bar { padding: 10px 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -592,15 +607,13 @@ body {
 </head>
 <body>
 
-<!-- Operating Principle -->
 <div class="principle-bar">
-  <span class="principle-label">Operating Principle</span>
-  <span class="principle-text">I solve problems once, then build systems so they stay solved.</span>
+  <span class="principle-label">How I operate</span>
+  <span class="principle-text">I solve it once. Then I build something so it stays solved.</span>
 </div>
 
-<!-- Top bar -->
 <header class="topbar">
-  <div class="logo"><em>IRA</em> OS</div>
+  <div class="logo">Manifest Smarter<sup>™</sup></div>
   <div class="date-label" id="date-label"></div>
   <div class="mode-pill" onclick="cycleMode()">
     <span class="mode-dot"></span>
@@ -610,59 +623,55 @@ body {
 
 <main class="main">
 
-  <!-- DCA -->
   <div class="dca-block">
-    <div class="dca-eyebrow">Dominant Chief Aim</div>
-    <div class="dca-headline">Build practical systems that strengthen capability, credibility, stability and autonomy — for myself, my whānau and future generations.</div>
+    <div class="dca-eyebrow">What I'm building</div>
+    <div class="dca-headline">Systems that create capability, credibility, stability and autonomy — for me, my whānau, and the ones who come after.</div>
   </div>
 
-  <!-- Outcomes -->
   <div class="outcomes-row">
     <div class="outcome-tile">
       <div class="outcome-num">74</div>
       <div class="outcome-name">Capability</div>
       <div class="outcome-bar"><div class="outcome-bar-fill" style="width:74%"></div></div>
-      <div class="outcome-q">What am I building?</div>
+      <div class="outcome-q">What am I getting better at?</div>
     </div>
     <div class="outcome-tile">
       <div class="outcome-num">61</div>
       <div class="outcome-name">Credibility</div>
       <div class="outcome-bar"><div class="outcome-bar-fill" style="width:61%"></div></div>
-      <div class="outcome-q">What evidence exists?</div>
+      <div class="outcome-q">What proves I can do this?</div>
     </div>
     <div class="outcome-tile">
       <div class="outcome-num">58</div>
       <div class="outcome-name">Stability</div>
       <div class="outcome-bar"><div class="outcome-bar-fill" style="width:58%"></div></div>
-      <div class="outcome-q">What becomes more stable?</div>
+      <div class="outcome-q">What holds even when I don't?</div>
     </div>
     <div class="outcome-tile">
       <div class="outcome-num">82</div>
       <div class="outcome-name">Autonomy</div>
       <div class="outcome-bar"><div class="outcome-bar-fill" style="width:82%"></div></div>
-      <div class="outcome-q">Does this expand future choice?</div>
+      <div class="outcome-q">Am I more free than yesterday?</div>
     </div>
   </div>
 
-  <!-- Signal + Constraint -->
   <div class="grid-2">
     <div class="panel">
-      <div class="section-label">Today's Signal</div>
-      <div class="signal-text">The constraint right now is open loops. Close them and everything moves.</div>
-      <div class="signal-sub">Two loops sitting open today. Both practical. Both closeable. Nothing else deserves energy until these are done.</div>
+      <div class="section-label">Today's signal</div>
+      <div class="signal-text">Two things. That's it. Do those and the day is done right.</div>
+      <div class="signal-sub">The spray tan machine and the trustee filing. Both practical. Both closeable. Don't complicate it.</div>
     </div>
     <div class="constraint-panel">
-      <div class="section-label">Biggest Constraint</div>
-      <div class="constraint-text">Open loops creating drag across all missions — close them to free the next level of progress</div>
-      <span class="tag tag-ink">All Missions</span>
+      <div class="section-label">What's in the way</div>
+      <div class="constraint-text">Open loops. Small but they're sitting on everything. Close them and watch what opens up.</div>
+      <span class="tag tag-dim">All Missions</span>
     </div>
   </div>
 
-  <!-- Close Today + Loops -->
   <div class="grid-2">
     <div class="panel">
       <div class="section-label">
-        Close Today
+        Close today
         <button class="add-btn">+</button>
       </div>
       <div class="loop-list">
@@ -680,83 +689,83 @@ body {
     </div>
 
     <div class="panel">
-      <div class="section-label">Decision Journal <button class="add-btn">+</button></div>
+      <div class="section-label">
+        What I know to be true
+        <button class="add-btn">+</button>
+      </div>
       <div>
         <div class="decision-row">
-          <div class="decision-text">Separated ŪKAIPŌ from DCA — it is the highest-impact mission, not the aim itself.</div>
+          <div class="decision-text">ŪKAIPŌ is the mission. Not the aim. The aim is bigger — it outlasts any single project.</div>
           <div class="decision-meta">
             <span>Today</span>
-            <span><span class="conf-dot" style="background:#7A8C72"></span>High confidence</span>
+            <span><span class="conf-dot" style="background:#8A9E82"></span>Certain</span>
           </div>
         </div>
         <div class="decision-row">
-          <div class="decision-text">Identified the real pattern — I don't solve from interest, I solve from problems. That explains everything built.</div>
+          <div class="decision-text">I don't build from interest. I build because something needs solving and I'm the one who sees it.</div>
           <div class="decision-meta">
             <span>This week</span>
-            <span><span class="conf-dot" style="background:#C4962A"></span>Clarifying</span>
+            <span><span class="conf-dot" style="background:#C4A882"></span>This is the pattern</span>
           </div>
         </div>
         <div class="decision-row">
-          <div class="decision-text">Close open loops before opening new ones — drag is the current constraint.</div>
+          <div class="decision-text">Stop opening new things until the open ones are closed. That's not discipline — that's just sense.</div>
           <div class="decision-meta">
             <span>Today</span>
-            <span><span class="conf-dot" style="background:#C47D7D"></span>Committed</span>
+            <span><span class="conf-dot" style="background:#5C3D2E"></span>Non-negotiable</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Top 3 Active Missions -->
   <div>
-    <div class="section-label" style="margin-bottom:14px">
-      Active Missions — Top 3
-    </div>
+    <div class="section-label" style="margin-bottom:14px">Where the energy goes — 3 of 8</div>
     <div class="mission-cards">
 
-      <div class="mission-card card-rose">
-        <div class="mission-card-label">Mission 1</div>
+      <div class="mission-card card-cacao">
+        <div class="mission-card-num">Mission 01</div>
         <div class="mission-card-name">Personal OS</div>
-        <div class="mission-card-dca">Build the world's easiest high-leverage personal operating system.</div>
+        <div class="mission-card-dca">The easiest high-leverage operating system in the world. Built by someone who actually uses it.</div>
         <div class="mission-card-outcomes">
-          <span class="tag tag-rose">Capability</span>
-          <span class="tag tag-rose">Credibility</span>
-          <span class="tag tag-rose">Stability</span>
-          <span class="tag tag-rose">Autonomy</span>
+          <span class="tag tag-cacao">Capability</span>
+          <span class="tag tag-cacao">Credibility</span>
+          <span class="tag tag-cacao">Stability</span>
+          <span class="tag tag-cacao">Autonomy</span>
         </div>
-        <div class="mission-card-stage">
+        <div class="mission-card-footer">
           <span>Building now</span>
           <span class="m-status m-active">Active</span>
         </div>
       </div>
 
       <div class="mission-card card-sage">
-        <div class="mission-card-label">Mission 2</div>
+        <div class="mission-card-num">Mission 02</div>
         <div class="mission-card-name">Governance</div>
-        <div class="mission-card-dca">Build governance systems that outlast individuals.</div>
+        <div class="mission-card-dca">Systems that keep working after I walk out the room.</div>
         <div class="mission-card-outcomes">
           <span class="tag tag-sage">Capability</span>
           <span class="tag tag-sage">Credibility</span>
           <span class="tag tag-sage">Stability</span>
         </div>
-        <div class="mission-card-stage">
-          <span>Tuka Hine — trustee filing</span>
+        <div class="mission-card-footer">
+          <span>Tuka Hine — filing today</span>
           <span class="m-status m-active">Active</span>
         </div>
       </div>
 
-      <div class="mission-card card-warm">
-        <div class="mission-card-label">Mission 3</div>
+      <div class="mission-card card-sand">
+        <div class="mission-card-num">Mission 03</div>
         <div class="mission-card-name">Rauwhenua · Ūkaipō</div>
-        <div class="mission-card-dca">Make Rauwhenua a recognised, mainstream model of maternity care.</div>
+        <div class="mission-card-dca">Mainstream maternity care that honours what was always known.</div>
         <div class="mission-card-outcomes">
-          <span class="tag tag-warm">Capability</span>
-          <span class="tag tag-warm">Credibility</span>
-          <span class="tag tag-warm">Stability</span>
-          <span class="tag tag-warm">Autonomy</span>
+          <span class="tag tag-sand">Capability</span>
+          <span class="tag tag-sand">Credibility</span>
+          <span class="tag tag-sand">Stability</span>
+          <span class="tag tag-sand">Autonomy</span>
         </div>
-        <div class="mission-card-stage">
-          <span>Highest impact mission</span>
+        <div class="mission-card-footer">
+          <span>Highest impact</span>
           <span class="m-status m-active">Active</span>
         </div>
       </div>
@@ -768,7 +777,6 @@ body {
 
 </main>
 
-<!-- Bottom nav -->
 <nav class="bottom-nav">
   <div class="nav-item active">Dashboard</div>
   <div class="nav-item">Missions</div>
@@ -786,9 +794,9 @@ body {
   document.getElementById('date-label').textContent = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 
   const modes = [
-    { label: 'Mode 1 — Capacity', color: '#7A8C72' },
-    { label: 'Mode 1½ — Visibility', color: '#C4962A' },
-    { label: 'Mode 2 — Execution', color: '#C47D7D' }
+    { label: 'Mode 1 — Capacity', color: '#8A9E82' },
+    { label: 'Mode 1½ — Visibility', color: '#C4A882' },
+    { label: 'Mode 2 — Execution', color: '#5C3D2E' }
   ];
   let modeIdx = 0;
   function cycleMode() {
@@ -797,9 +805,7 @@ body {
     document.querySelector('.mode-dot').style.background = modes[modeIdx].color;
   }
 
-  function toggleLoop(item) {
-    item.classList.toggle('done');
-  }
+  function toggleLoop(item) { item.classList.toggle('done'); }
 
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
