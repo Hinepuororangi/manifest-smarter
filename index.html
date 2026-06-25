@@ -837,42 +837,78 @@ function resetCoach() {
 // ═══════════════════
 // INIT — simple and direct
 // ═══════════════════
-async function init() {
-  // Load loops
-  const {data: ld, error: le} = await sb.from('loops').select('*').order('created_at',{ascending:false});
-  if(!le && ld) { loops=ld; }
-  renderDashLoops();
+function showError(where, msg) {
+  const el = document.getElementById(where);
+  if(el) el.innerHTML = `<div style="padding:12px;background:#FFF0F0;border:1px solid #FFCCCC;border-radius:4px;font-size:12px;color:#CC4444;line-height:1.6">${msg}</div>`;
+}
 
-  // Load decisions
-  const {data: dd, error: de} = await sb.from('decisions').select('*').order('created_at',{ascending:false});
-  if(!de && dd) { decisions=dd; }
-  renderDecsDash();
+async function init() {
+  // Test connection first
+  try {
+    // Load loops
+    const {data: ld, error: le} = await sb.from('loops').select('*').order('created_at',{ascending:false});
+    if(le) {
+      showError('loop-list-d', `Supabase error loading loops:<br><strong>${le.message}</strong><br><small>Code: ${le.code || 'unknown'}</small>`);
+    } else {
+      loops = ld || [];
+      renderDashLoops();
+    }
+  } catch(e) {
+    showError('loop-list-d', `Connection failed:<br><strong>${e.message}</strong><br><small>Check your internet connection</small>`);
+  }
+
+  try {
+    // Load decisions
+    const {data: dd, error: de} = await sb.from('decisions').select('*').order('created_at',{ascending:false});
+    if(de) {
+      showError('dec-list-d', `Supabase error loading decisions:<br><strong>${de.message}</strong><br><small>Code: ${de.code || 'unknown'}</small>`);
+    } else {
+      decisions = dd || [];
+      renderDecsDash();
+    }
+  } catch(e) {
+    showError('dec-list-d', `Connection failed:<br><strong>${e.message}</strong>`);
+  }
 
   // Seed real projects if not already there
-  const names = loops.map(l=>l.name.toLowerCase());
-  const toSeed = [];
-  if(!names.includes('fix spray tan machine')) {
-    toSeed.push({name:'Fix spray tan machine',tag:'Business',done:false,steps:JSON.stringify([
-      {id:'1',name:'Drop off machine for assessment',status:'done'},
-      {id:'2',name:'Get ball bearings from McDonald's',status:'active'},
-      {id:'3',name:'Drop off at Men's Shed',status:'todo'},
-      {id:'4',name:'Wait — can they fix it?',status:'todo'},
-      {id:'5',name:'Collect when done',status:'todo'}
-    ])});
-  }
-  if(!names.includes('kaitangata 5e — change of trustees')) {
-    toSeed.push({name:'Kaitangata 5E — Change of trustees',tag:'Kaitangata 5E',done:false,steps:JSON.stringify([
-      {id:'1',name:'Advertise hui',status:'done'},
-      {id:'2',name:'Have hui',status:'done'},
-      {id:'3',name:'Fill out forms',status:'done'},
-      {id:'4',name:'Fix corrections + fill missing parts on 1 form',status:'active'},
-      {id:'5',name:'Lodge application',status:'todo'},
-      {id:'6',name:'Pay $68 filing fee',status:'todo'}
-    ])});
-  }
-  if(toSeed.length) {
-    const {data: sd} = await sb.from('loops').insert(toSeed).select();
-    if(sd) { loops = [...sd, ...loops]; renderDashLoops(); }
+  if(loops.length >= 0) {
+    try {
+      const names = loops.map(l=>l.name.toLowerCase());
+      const toSeed = [];
+      if(!names.includes('fix spray tan machine')) {
+        toSeed.push({name:'Fix spray tan machine',tag:'Business',done:false,steps:JSON.stringify([
+          {id:'1',name:'Drop off machine for assessment',status:'done'},
+          {id:'2',name:"Get ball bearings from McDonald's",status:'active'},
+          {id:'3',name:'Drop off at Men's Shed',status:'todo'},
+          {id:'4',name:'Wait — can they fix it?',status:'todo'},
+          {id:'5',name:'Collect when done',status:'todo'}
+        ])});
+      }
+      if(!names.includes('kaitangata 5e — change of trustees')) {
+        toSeed.push({name:'Kaitangata 5E — Change of trustees',tag:'Kaitangata 5E',done:false,steps:JSON.stringify([
+          {id:'1',name:'Advertise hui',status:'done'},
+          {id:'2',name:'Have hui',status:'done'},
+          {id:'3',name:'Fill out forms',status:'done'},
+          {id:'4',name:'Fix corrections + fill missing parts on 1 form',status:'active'},
+          {id:'5',name:'Lodge application',status:'todo'},
+          {id:'6',name:'Pay $68 filing fee',status:'todo'}
+        ])});
+      }
+      if(toSeed.length) {
+        const {data: sd, error: se} = await sb.from('loops').insert(toSeed).select();
+        if(se) {
+          // steps column might not exist yet - seed without steps
+          const toSeedBasic = toSeed.map(({steps, ...rest}) => rest);
+          const {data: sd2} = await sb.from('loops').insert(toSeedBasic).select();
+          if(sd2) { loops = [...sd2, ...loops]; renderDashLoops(); }
+        } else if(sd) {
+          loops = [...sd, ...loops];
+          renderDashLoops();
+        }
+      }
+    } catch(e) {
+      // Seeding failed silently - not critical
+    }
   }
 }
 
